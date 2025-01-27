@@ -64,7 +64,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         else
         {
             // #Critical, we must first and foremost connect to Photon Online Server.
-            PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
             isConnecting = PhotonNetwork.ConnectUsingSettings();
         }
