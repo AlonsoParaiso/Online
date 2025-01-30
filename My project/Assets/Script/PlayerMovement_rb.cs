@@ -57,6 +57,10 @@ public class PlayerMovement_rb : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected) 
+        {
+            return; 
+        }
         x = Input.GetAxisRaw("Horizontal"); //GetAxisRaw sirve para teclado y mando
         z = Input.GetAxisRaw("Vertical");
         pressRun = Input.GetKey(KeyCode.LeftShift);
