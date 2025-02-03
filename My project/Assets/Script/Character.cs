@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ClashofWorlds //crea un espacio de nombres para evitar la colision de nombres
-{
+
+
     public abstract class Character
     {
         //informacion de los players
@@ -12,21 +12,16 @@ namespace ClashofWorlds //crea un espacio de nombres para evitar la colision de 
 
 
         public float speed, damage, health;
-        protected GameObject _obj;
-        protected Rigidbody _rb;
+        private string prefabPath;
 
-        public Character(float speed, Rigidbody rb, GameObject obj, float damage, float health) //constructor general de los personajes
+    public Character(float speed, float damage, float health, string prefabPath) //constructor general de los personajes
         {
             this.speed = speed;
-            _rb = rb;
-            _obj = obj;
             this.health = health;
-            //_controller = cont;
+            this.prefabPath = prefabPath;
+        //_controller = cont;
 
-        }
-        public GameObject GetObject() { return _obj; } //se genere el sprite
-
-
+    }
         //public AnimatorController GetAnimatorController() { return _controller; } //animaciones
         public float GetDamage()  // el metodo que aparecera en los hijos para el daño 
         {
@@ -51,8 +46,7 @@ namespace ClashofWorlds //crea un espacio de nombres para evitar la colision de 
         {
 
         }
-        
-            
-        
-    }
+        public string GetprefabPath() { return prefabPath; }
+
 }
+

@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using Photon.Pun.Demo.PunBasics;
+using Photon.Pun;
+using UnityEngine;
+
+
+
+public class CharacterInstantation : MonoBehaviour
+{
+    public GameObject playerPrefab;
+
+    Character character;
+    public int characterIndexes;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+        switch (GameManager.instance.characterIndexes[characterIndexes])
+        {
+            case 0:
+                character = new GhostFace(5,"Prefabs/ghostface");
+                break;
+
+            //case 1:
+            //    character = new Bomba("Prefabs/bomba", 25, 100);
+            //    break;
+        }
+        //EL PREFAB NO SE PUEDE CARGAR DE PRIMERAS DEBIDO A QUE SI LO CARGAS 2 VECES DA ERROS PQ NO HAY QUE LEERLO 2 VECES
+        if (PlayerManager.localPlayerInstance == null)
+        {
+            Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+
+            PhotonNetwork.Instantiate(character.GetprefabPath(), new Vector3(0f, 5f, 0f), Quaternion.identity, 0);//Eto va debido a que lo cargamos con la escena ya cargada y emtpmnces ya va bien
+        }
+        else
+
+        {
+            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+        }
+        //Instantiate(character.GetGO(), new Vector3(0, 0, 0), Quaternion.identity);
+    }
+}

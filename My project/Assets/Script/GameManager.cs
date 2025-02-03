@@ -7,34 +7,42 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.Demo.PunBasics;
+using UnityEditor;
 
-namespace Com.MyCompany.MyGame
-{
+
+
     public class GameManager : MonoBehaviourPunCallbacks
     {
-
+        public static GameManager instance;
+        public uint[] characterIndexes;
+        Character character; 
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
 
+        private void Awake()
+        {
+            if (!instance)
+            {
+                instance = this;//se instancia el objecto
+                DontDestroyOnLoad(gameObject);// no se destruye entre cargas
+                characterIndexes = new uint[2];
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
         private void Start()
         {
+
+            //playerPrefab = SelectCharacter();
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
             }
             else
             {
-                if (PlayerManager.LocalPlayerInstance == null)
-                {
-                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    
-                    StartCoroutine(InstantiatePlayer());
-                }
-                else
-                {
-                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-                }
+               
             }
         }
 
@@ -107,5 +115,17 @@ namespace Com.MyCompany.MyGame
         }
 
         #endregion
+
+        public void ExitGame()
+        {
+            Debug.Log("Me cerraste wey");
+            Application.Quit();
+        }
+
+        public void SelectCharacter(int Selection)
+        {
+            characterIndexes[0] = (uint)Selection;
+
+        }
     }
-}
+
