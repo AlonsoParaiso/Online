@@ -8,24 +8,21 @@ using UnityEngine;
 
 public class CharacterInstantation : MonoBehaviour
 {
-    public GameObject playerPrefab;
-
     Character character;
-    public int characterIndexes;
 
     // Start is called before the first frame update
     void Start()
     {
         
-        switch (GameManager.instance.characterIndexes[characterIndexes])
+        switch (GameManager.instance.characterIndex)
         {
             case 0:
-                character = new GhostFace(5,"Prefabs/ghostface");
+                character = new GhostFace(5,"ghostface");
                 break;
 
-            //case 1:
-            //    character = new Bomba("Prefabs/bomba", 25, 100);
-            //    break;
+            case 1:
+                character = new Bomba(10, "bomba");
+                break;
         }
         //EL PREFAB NO SE PUEDE CARGAR DE PRIMERAS DEBIDO A QUE SI LO CARGAS 2 VECES DA ERROS PQ NO HAY QUE LEERLO 2 VECES
         if (PlayerManager.localPlayerInstance == null)

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class CameraWork : MonoBehaviour
+public class CameraWork : MonoBehaviourPun
 {
     #region Private Fields
 
@@ -45,7 +46,7 @@ public class CameraWork : MonoBehaviour
     void Start()
     {
         // Start following the target if wanted.
-        if (followOnStart)
+        if (followOnStart || photonView.IsMine)
         {
             OnStartFollowing();
         }

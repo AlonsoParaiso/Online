@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 using Photon.Realtime;
-using Photon.Pun.Demo.PunBasics;
 using UnityEditor;
 
 
@@ -14,9 +13,8 @@ using UnityEditor;
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public static GameManager instance;
-        public uint[] characterIndexes;
+        public int characterIndex;
         Character character; 
-        [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
 
         private void Awake()
@@ -25,7 +23,6 @@ using UnityEditor;
             {
                 instance = this;//se instancia el objecto
                 DontDestroyOnLoad(gameObject);// no se destruye entre cargas
-                characterIndexes = new uint[2];
             }
             else
             {
@@ -38,19 +35,15 @@ using UnityEditor;
             //playerPrefab = SelectCharacter();
             if (playerPrefab == null)
             {
-                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+                
             }
             else
             {
-               
+            
             }
         }
 
-        IEnumerator InstantiatePlayer()
-        {
-            yield return new WaitForSeconds(.3f);
-            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-        }
+       
 
         #region Photon Callbacks
 
@@ -124,7 +117,7 @@ using UnityEditor;
 
         public void SelectCharacter(int Selection)
         {
-            characterIndexes[0] = (uint)Selection;
+            characterIndex = (int)Selection;
 
         }
     }
