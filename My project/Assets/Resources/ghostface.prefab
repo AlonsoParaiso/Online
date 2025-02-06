@@ -115,6 +115,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: ghostface
       objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08053589
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28599548
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 0adcdad88532c55408133f10fffc1ec5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -190,10 +222,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   running: 2
-  rotationSpeed: 3
+  rotationSpeed: 50
   jumpForce: 0
   sphereRadius: 0
   acceleration: 1
+  maxtime: 5
   groundMask: 
 --- !u!114 &-1183262282214550575
 MonoBehaviour:

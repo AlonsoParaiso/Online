@@ -8,11 +8,12 @@ using UnityEngine;
 public class PlayerMovement_rb : MonoBehaviourPunCallbacks
 {
     [Header("Fisicas")]
-    public float speed, running, rotationSpeed, jumpForce, sphereRadius, acceleration /*, gravityScale*/;
+    public float speed, running, rotationSpeed, jumpForce, sphereRadius, acceleration , maxtime;/*, gravityScale*/
     public string groundMask;
     private Rigidbody rb;
     private float x, z,mouseX; //inputs
     private float currentSpeed;
+    private float currenttime;  // para la cadencia de disparo
     private bool pressJump,pressRun;
     private Vector3 movementVector;
 
@@ -22,12 +23,13 @@ public class PlayerMovement_rb : MonoBehaviourPunCallbacks
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        currenttime = maxtime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currenttime += Time.deltaTime;
         if (!photonView.IsMine && PhotonNetwork.IsConnected) 
         {
             return; 
@@ -42,6 +44,11 @@ public class PlayerMovement_rb : MonoBehaviourPunCallbacks
             pressJump = true;
         }
         InterpolateSpeed();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currenttime>=maxtime)
+        {
+            GameManager.instance.GetCharacter().Attack(gameObject); 
+            currenttime = 0;
+        }
     }
 
     void RotatePlayer()

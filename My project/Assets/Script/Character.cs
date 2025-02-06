@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ using UnityEngine;
             health = Mathf.Clamp(health, 0, 100);  // lo clampeamos para que al curarse no sobrepase los 100 de vida 
             return health;
         }
-        public abstract void Attack(Transform ownerTransform);
+        public abstract void Attack(GameObject owner);
 
         public virtual void ReceiveDamage(float damage)
         {
@@ -48,5 +49,6 @@ using UnityEngine;
         }
         public string GetprefabPath() { return prefabPath; }
 
+    
 }
 

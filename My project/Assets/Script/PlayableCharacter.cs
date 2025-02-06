@@ -16,9 +16,9 @@ using UnityEngine;
 
         }
 
-        public override void Attack(Transform ownerTransform)
+        public override void Attack(GameObject owner)
         { 
-            GameObject.Instantiate(bullet, ownerTransform.position, Quaternion.identity); 
+            GameObject.Instantiate(bullet, owner.transform.position, Quaternion.identity); 
         }
         
     }

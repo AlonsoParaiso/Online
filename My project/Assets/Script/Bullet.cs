@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
+    public float speed = 5;
     public Vector3 dir;
     private Rigidbody rb;
-    private float timeDestroy = 5;
     private float currentTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
 
         rb = GetComponent<Rigidbody>();
-        dir = transform.forward;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
-        if (currentTime >= timeDestroy)
+       if(currentTime >= 3)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+            currentTime = 0;
+            speed = 0;
         }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = dir * speed * Time.deltaTime;
+        
+        rb.velocity = dir * speed;
     }
 }

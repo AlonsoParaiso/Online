@@ -12,9 +12,9 @@ using UnityEngine;
         {
          
         }
-    public override void Attack(Transform owner)
+    public override void Attack(GameObject owner)
     {
-        BulletSpawn(owner.transform, owner.GetComponent<BulletPool>().bulletPool);
+        BulletSpawn(owner.transform, owner.GetComponentInChildren<BulletPool>().bulletPool); 
     }
 
     void BulletSpawn(Transform transform, PoolObject bulletPool)
@@ -24,8 +24,10 @@ using UnityEngine;
         {
             obj.SetActive(true);
 
-            obj.transform.position = new Vector3(transform.transform.position.x + 2, transform.transform.position.y + 2, transform.transform.position.z + 2);
-
+            obj.transform.position = new Vector3 (transform.transform.position.x , transform.transform.position.y +1, transform.transform.position.z);
+            
+            obj.GetComponent<Bullet>().dir = transform.forward;
+            obj.GetComponent<Bullet>().speed = 5;
         }
     }
 }
