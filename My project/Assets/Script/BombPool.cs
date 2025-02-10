@@ -5,11 +5,7 @@ using UnityEngine;
 public class BombPool : MonoBehaviour
 {
     public PoolObject bombPool;
-    public float maxTime;
     public PoolType poolTypeToSearch;
-
-    private float currentTime;
-
 
     private void Start()
     {

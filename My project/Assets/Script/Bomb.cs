@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public float maxTime, speed, trowForce;
+    public float maxTime, trowForce;
 
     private float currentTime;
     private Rigidbody rb;
@@ -22,7 +22,8 @@ public class Bomb : MonoBehaviour
         {
             currentTime = 0;
             rb.velocity = Vector3.zero;
-            gameObject.SetActive(false);
+            GetComponent<PunPoolObject>().readyToUse = true;
+            //gameObject.SetActive(false);
         }
     }
 
@@ -33,7 +34,7 @@ public class Bomb : MonoBehaviour
 
     public void ApplyParabolicThrow(Transform ownerTransform)
     {
-        rb.AddForce(((ownerTransform.localScale.x < 0 ? -ownerTransform.right : ownerTransform.right) + Vector3.up) * trowForce);
+        rb.AddForce((ownerTransform.forward + Vector3.up) * trowForce);
     }
 
     private void OnDisable()

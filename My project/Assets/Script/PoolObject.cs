@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public enum PoolType {BULLET, BOMB}
-public class PoolObject : MonoBehaviour
+public class PoolObject : MonoBehaviourPunCallbacks
 {
 
     private List<GameObject> poolList;
@@ -34,9 +35,11 @@ public class PoolObject : MonoBehaviour
 
     GameObject AddGameObject()
     {
-        GameObject clone = Instantiate(objectToPool); // el gameobject
-        clone.SetActive(false); // lo activas en falso para que vaya 
-        poolList.Add(clone); // lo añadimos a la lista 
+        GameObject clone = PhotonNetwork.Instantiate(this.objectToPool.name,new Vector3(0,0,0),Quaternion.identity,0); // el gameobject
+        if (clone != null)
+        {
+            poolList.Add(clone);
+        }
 
         return clone;
     }
@@ -45,7 +48,7 @@ public class PoolObject : MonoBehaviour
     {
         foreach (GameObject obj in poolList) // para recorrer la lista 
         {
-            if (!obj.activeSelf) // si el objeto no esta activo
+            if (obj.GetComponent<PunPoolObject>().readyToUse) // si el objeto no esta activo
             {
                 return obj;
             }
@@ -55,5 +58,21 @@ public class PoolObject : MonoBehaviour
             return AddGameObject();
         }
         return null;
+    }
+
+    public void DelayInstantiateObjects()
+    {
+        StartCoroutine(InstantiateObjects());
+    }
+
+    IEnumerator InstantiateObjects()
+    {
+        yield return new WaitForSeconds(0.3F);
+
+        poolList.Clear();
+        for (int i = 0; i < poolSize; i++) // para que instancie x objetos al inicio 
+        {
+            AddGameObject();
+        }
     }
 }

@@ -11,7 +11,7 @@ public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         if (stream.IsWriting)
         {
             stream.SendNext(readyToUse);
-            gameObject.SetActive(!readyToUse);//corrutina
+            gameObject.SetActive(!readyToUse);
         }
         else
         {

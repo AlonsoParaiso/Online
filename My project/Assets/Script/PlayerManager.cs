@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviourPunCallbacks
+public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     public static GameObject localPlayerInstance;
-    private Character character;
+    public float Health;
+    public GameObject PlayerUiPrefab;
+
     private void Awake()
     {
         if (photonView.IsMine)
@@ -34,7 +36,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             Debug.LogError("El componente CameraWork en el prefab ", this);
         }
-
+        if (PlayerUiPrefab != null)
+        {
+            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
 
 #if UNITY_5_4_OR_NEWER
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -44,6 +54,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
     {
         CalledOnLevelWasLoaded(scene.buildIndex);
+        GetComponentInChildren<PoolObject>()?.DelayInstantiateObjects();
     }
     void OnLevelWasLoaded(int level)
     {
@@ -57,6 +68,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             transform.position = new Vector3(0f, 5f, 0f);
         }
+        GameObject _uiGo = Instantiate(this.PlayerUiPrefab);
+        _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
     }
 
 
@@ -65,6 +78,19 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         //siempre llama la base para quitar los callbacks 
         base.OnDisable();
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(Health);
+        }
+        else
+        {
+            Health =(float)stream.ReceiveNext();
+        }
+
     }
 
 
