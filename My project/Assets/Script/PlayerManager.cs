@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (PlayerUiPrefab != null)
         {
-            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            //GameObject _uiGo = Instantiate(PlayerUiPrefab);
             
         }
         else
@@ -85,6 +85,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(Health);
+            
+
+
         }
         else
         {

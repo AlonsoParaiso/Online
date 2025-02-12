@@ -27,7 +27,7 @@ namespace Com.MyCompany.MyGame
 
         void Start()
         {
-            target = GetComponent<PlayerManager>();
+            target = GetComponentInParent<PlayerManager>();
             playerNameText.text = photonView.Owner.NickName;
             
 
@@ -35,16 +35,7 @@ namespace Com.MyCompany.MyGame
        
         void Update()
         {
-            //// Reflect the Player Health
-            //if (playerHealthSlider != null)
-            //{
-            //    playerHealthSlider.value = target.Health;
-            //}
-            //if (target == null)
-            //{
-            //    Destroy(this.gameObject);
-            //    return;
-            //}
+            playerHealthSlider.value = target.Health;
         }
 
 

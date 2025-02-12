@@ -586,8 +586,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4695610306300461091, guid: 4b14144787f7ac84889ca3f3484cb054, type: 3}
+      propertyPath: m_Value
+      value: 0.298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695610306300461091, guid: 4b14144787f7ac84889ca3f3484cb054, type: 3}
       propertyPath: m_HandleRect
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695610306300461091, guid: 4b14144787f7ac84889ca3f3484cb054, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4695610306300461091, guid: 4b14144787f7ac84889ca3f3484cb054, type: 3}
       propertyPath: m_TargetGraphic
