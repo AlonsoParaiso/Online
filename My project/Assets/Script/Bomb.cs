@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public float maxTime, trowForce;
+    public float damage = .25f;
 
     private float currentTime;
     private Rigidbody rb;
@@ -39,8 +40,17 @@ public class Bomb : MonoBehaviour
 
     private void OnDisable()
     {
-        
-       
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1);
+        for (int i = 0; i < colliders.Length; i++) //recorremos elemento a elemento.
+        {
+            // y comprobamos si el elemento es suelo o no.
+            if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                PlayerManager pM = colliders[i].GetComponent<PlayerManager>();
+                pM.Health -= damage;
+            }
+        }
+
     }
 
 }

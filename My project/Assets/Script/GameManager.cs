@@ -32,15 +32,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
 
-        //playerPrefab = SelectCharacter();
-        if (playerPrefab == null)
-        {
-
-        }
-        else
-        {
-
-        }
     }
 
 
@@ -127,6 +118,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Character GetCharacter()
     {
         return character;
+    }
+
+    public void Victory()
+    {
+
+
+        PhotonNetwork.LoadLevel("Derrota");
+        
     }
 }
 

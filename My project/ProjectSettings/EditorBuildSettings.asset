@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Room for 4.unity
     guid: c752d111fb3d0e64287cfceb884b7262
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 1fe315a8207fded479e138e7110771bc
+  - enabled: 1
+    path: Assets/Scenes/Derrota.unity
+    guid: 60e9adadac22e1549b664fb6c2e399da
   m_configObjects: {}

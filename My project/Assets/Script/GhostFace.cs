@@ -24,10 +24,10 @@ using UnityEngine;
         {
             obj.SetActive(true);
 
-            obj.transform.position = new Vector3 (transform.transform.position.x , transform.transform.position.y +1, transform.transform.position.z);
-            
+            obj.transform.position = new Vector3 (transform.transform.position.x , transform.transform.position.y +1, transform.transform.position.z) + transform.forward*2;
             obj.GetComponent<Bullet>().dir = transform.forward;
             obj.GetComponent<Bullet>().speed = 5;
+            obj.GetComponent<PunPoolObject>().readyToUse = false;
         }
     }
 }

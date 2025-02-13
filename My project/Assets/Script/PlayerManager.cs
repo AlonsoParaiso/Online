@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -50,6 +51,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 #endif
     }
+
+    private void Update()
+    {
+        if (photonView.IsMine)
+        {
+            if (Health <= 0)
+            {
+                //GameManager.instance.LeaveRoom();
+                PhotonNetwork.LoadLevel("Victory");
+            }
+        }
+
+    }
+
+
 #if UNITY_5_4_OR_NEWER
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
     {
@@ -77,7 +93,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         //siempre llama la base para quitar los callbacks 
         base.OnDisable();
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        if ("Room for 2" == SceneManager.GetActiveScene().name)
+        {
+            GameManager.instance.Victory();
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

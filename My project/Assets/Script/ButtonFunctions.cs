@@ -16,5 +16,10 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.SelectCharacter(selection);
 
     }
+
+    public void LauncherScene()
+    {
+        GameManager.instance.LeaveRoom();
+    }
 }
 
